@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+# #GANTI: ganti dengan domain aslimu
+Sitemap: https://alfianmalika.vercel.app/sitemap.xml
