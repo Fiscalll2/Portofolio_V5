@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, memo } from "react"
 import { Helmet } from "react-helmet-async"
-import { Github, Linkedin, Mail, ExternalLink, Sparkles } from "lucide-react"
+import { Github, Linkedin, Mail, ExternalLink, Instagram, Sparkles } from "lucide-react"
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -81,7 +81,8 @@ const TECH_STACK = ["React", "Javascript", "Node.js", "Tailwind"];
 // #GANTI: ganti link sosial media di bawah dengan milikmu
 const SOCIAL_LINKS = [
   { icon: Github, link: "https://github.com/Fiscalll2", label: "GitHub Profile" },
-  { icon: Linkedin, link: "https://www.linkedin.com/in/alfian-malika-24b494327/", label: "LinkedIn Profile" }
+  { icon: Linkedin, link: "https://www.linkedin.com/in/alfian-malika-24b494327/", label: "LinkedIn Profile" },
+  { icon: Instagram, link: "https://www.instagram.com/f__fian/", label: "Instagram Profile" }
 ];
 
 const Home = () => {

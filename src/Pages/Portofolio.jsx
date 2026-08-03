@@ -15,7 +15,7 @@ import TechStackIcon from "../components/TechStackIcon";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Certificate from "../components/Certificate";
-import { Code, Award, Boxes } from "lucide-react";
+import { Code, Award, Boxes, FolderGit2, ImageIcon } from "lucide-react";
 
 
 const ToggleButton = ({ onClick, isShowingMore }) => (
@@ -101,6 +101,37 @@ function a11yProps(index) {
     "aria-controls": `full-width-tabpanel-${index}`,
   };
 }
+
+// #GANTI: kotak placeholder saat data proyek/sertifikat masih kosong (belum diisi lewat Dashboard)
+const ProjectPlaceholder = () => (
+  <div className="group relative w-full">
+    <div className="relative overflow-hidden rounded-xl bg-white/[0.02] backdrop-blur-lg border-2 border-dashed border-white/10 hover:border-purple-500/40 transition-all duration-300">
+      <div className="relative p-5 z-10">
+        <div className="relative overflow-hidden rounded-lg aspect-[16/8] bg-white/5 flex items-center justify-center">
+          <FolderGit2 className="w-10 h-10 text-white/10" />
+        </div>
+        <div className="mt-4 space-y-3">
+          <div className="h-4 w-2/3 bg-white/5 rounded-lg" />
+          <div className="h-3 w-full bg-white/5 rounded-lg" />
+          <div className="h-3 w-4/5 bg-white/5 rounded-lg" />
+          <div className="pt-4 flex items-center justify-between">
+            <span className="text-gray-500 text-sm">Coming Soon</span>
+            <span className="text-gray-600 text-xs">Isi lewat Dashboard</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const CertificatePlaceholder = () => (
+  <div className="relative group">
+    <div className="relative bg-white/[0.02] border-2 border-dashed border-white/10 hover:border-indigo-500/40 rounded-xl overflow-hidden aspect-[16/11.5] flex flex-col items-center justify-center gap-2 transition-all duration-300">
+      <ImageIcon className="w-8 h-8 text-white/10" />
+      <span className="text-gray-600 text-xs">Belum ada sertifikat</span>
+    </div>
+  </div>
+);
 
 // techStacks tetap sama
 const techStacks = [
@@ -312,21 +343,27 @@ export default function FullWidthTabs() {
           <TabPanel value={value} index={0} dir={theme.direction}>
             <div className="container mx-auto flex justify-center items-center overflow-hidden">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
-                {displayedProjects.map((project, index) => (
-                  <div
-                    key={project.id || index}
-                    data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
-                    data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
-                  >
-                    <CardProject
-                      Img={project.Img}
-                      Title={project.Title}
-                      Description={project.Description}
-                      Link={project.Link}
-                      id={project.id}
-                    />
-                  </div>
-                ))}
+                {displayedProjects.length === 0 ? (
+                  Array.from({ length: 6 }).map((_, index) => (
+                    <ProjectPlaceholder key={`ph-${index}`} />
+                  ))
+                ) : (
+                  displayedProjects.map((project, index) => (
+                    <div
+                      key={project.id || index}
+                      data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
+                      data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
+                    >
+                      <CardProject
+                        Img={project.Img}
+                        Title={project.Title}
+                        Description={project.Description}
+                        Link={project.Link}
+                        id={project.id}
+                      />
+                    </div>
+                  ))
+                )}
               </div>
             </div>
             {projects.length > initialItems && (
@@ -342,15 +379,21 @@ export default function FullWidthTabs() {
           <TabPanel value={value} index={1} dir={theme.direction}>
             <div className="container mx-auto flex justify-center items-center overflow-hidden">
               <div className="grid grid-cols-1 md:grid-cols-3 md:gap-5 gap-4">
-                {displayedCertificates.map((certificate, index) => (
-                  <div
-                    key={certificate.id || index}
-                    data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
-                    data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
-                  >
-                    <Certificate ImgSertif={certificate.Img} />
-                  </div>
-                ))}
+                {displayedCertificates.length === 0 ? (
+                  Array.from({ length: 6 }).map((_, index) => (
+                    <CertificatePlaceholder key={`ph-${index}`} />
+                  ))
+                ) : (
+                  displayedCertificates.map((certificate, index) => (
+                    <div
+                      key={certificate.id || index}
+                      data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
+                      data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
+                    >
+                      <Certificate ImgSertif={certificate.Img} />
+                    </div>
+                  ))
+                )}
               </div>
             </div>
             {certificates.length > initialItems && (
